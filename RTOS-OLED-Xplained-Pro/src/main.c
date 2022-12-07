@@ -261,7 +261,7 @@ static void task_game(void *pvParameters) {
 	int d;
 	int h = 0;
 	int to_tocando = 1;
-	
+
 	TC_init(TC0, ID_TC0, 0, 1000);
 	TC_init(TC1, ID_TC3, 0, 1500);
 	TC_init(TC2, ID_TC6, 0, 2000);
@@ -305,6 +305,7 @@ static void task_game(void *pvParameters) {
 					nSequence = genius_get_sequence(level, sequence);
 					delay_ms(2000);
 					to_tocando = 1;
+					xQueueReset(xQueueBtn);
 					break;
 				}else{
 					to_tocando = 0;
@@ -343,6 +344,7 @@ static void task_game(void *pvParameters) {
 				level = 0;
 				nSequence = genius_get_sequence(level, sequence);
 				to_tocando = 1;
+				xQueueReset(xQueueBtn);
 				delay_ms(2000);
 			}
 			if(h == (nSequence - 1)){
@@ -362,6 +364,7 @@ static void task_game(void *pvParameters) {
 			level = 0;
 			nSequence = genius_get_sequence(level, sequence);
 			to_tocando = 1;
+			xQueueReset(xQueueBtn);
 			delay_ms(2000);
 		}
 	}
